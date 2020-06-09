@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AuthPresenter from "./AuthPresenter"
+import AuthPresenter from "./AuthPresenter";
 import useInput from "../../Hooks/useInput";
 import { useMutation } from "react-apollo-hooks";
 import { LOG_IN, CREATE_ACCOUNT } from "./AuthQueries";
@@ -11,16 +11,16 @@ export default () => {
     const firstName = useInput("");
     const lastName = useInput("");
     const email = useInput("wooqii@gmail.com");
-    const [requestSecret] = useMutation(LOG_IN, {
-        upadate: (_, {data} ) => {
+    const [requestSecret] = useMutation(LOG_IN, { 
+        update: (_, {data} ) => {
             const {requestSecret} = data;
             if (!requestSecret) {
                 toast.error("You don't have an account yet, create one");
-                setTimeout(() => setAction("signUp"),3000);
+				setTimeout(() => setAction("signUp"), 3000);
             }
         },
         variables: { email: email.value } });
-    
+
     const [createAccount] = useMutation(CREATE_ACCOUNT, {
         variables: {
             email: email.value,
@@ -32,18 +32,18 @@ export default () => {
 
     const onSubmit = e => {
         e.preventDefault();
-        if ( action === "logIn" ) {
+        if (action === "logIn") {
             if (email.value !== ""){
-            requestSecret();
+                requestSecret();
             } else {
                 toast.error("Email is required");
             }
         } else if (action === "signUp") {
             if (
-                email.value !== ""&&
-                username.value !== ""&&
-                firstName !== ""&&
-                lastName !== ""
+                email.value !== "" &&
+                username.value !== "" &&
+                firstName !== "" &&
+                lastName !== "" 
             ) {
                 createAccount();
             } else {
@@ -53,14 +53,14 @@ export default () => {
     };
 
     return (
-        <AuthPresenter
-            setAction={setAction}
-            action={action}
-            username={username}
-            firstName={firstName}
-            lastName={lastName}
-            email={email}
-            onSubmit={onSubmit}
-            />
+    <AuthPresenter 
+        setAction={setAction} 
+        action={action} 
+        username={username} 
+        firstName={firstName} 
+        lastName={lastName} 
+        email={email} 
+        onSubmit={onSubmit}
+        />
     );
 };

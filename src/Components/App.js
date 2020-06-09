@@ -4,6 +4,7 @@ import styled, { ThemeProvider } from "styled-components";
 import GlobalStyles from '../Styles/GlobalStyles';
 import { useQuery } from "react-apollo-hooks";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Theme from "../Styles/Theme"
 import Router from "./Router"
 import Footer from "./Footer";
