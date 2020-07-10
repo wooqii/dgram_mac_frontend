@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "rl-react-helmet";
 import styled from "styled-components";
 import Input from "../../Components/Input";
 import Button from "../../Components/Button";
@@ -60,27 +61,44 @@ export default ({
     <Wrapper>
       <Form>
           {action === "logIn" && (
+              <>
+              <Helmet>
+                <title>Log in | Dgram</title>
+              </Helmet>
               <form onSubmit={onSubmit}>
-                  <Input placeholder={"Email"} {...email} type="email" />
-                  <Button text={"Log in"} />
+              <Input placeholder={"Email"} {...email} type="email" />
+              <Button text={"Log in"} />
               </form>
+            </>
           )} 
-          {action === "signUp" && (
-            <form onSubmit={onSubmit}>
+          { action === "singUp" && (
+           <>
+           <Helmet>
+             <title>Sign Up | Dgram</title>
+           </Helmet>
+           <form onSubmit={onSubmit}>
                 <Input placeholder={"First name"} {...firstName} />
                 <Input placeholder={"Last name"} {...lastName} />
                 <Input placeholder={"Email"} {...email} type="email" />
                 <Input placeholder={"Username"} {...username} />
                 <Button text={"Sign up"} />
             </form>
+          </>
         )}
-        {action === "confirm" && ( <form onSubmit={onSubmit}>
-            <Input placeholder="Paste your secret" required {...secret} />
+        { action === "confirm" && (
+        <>
+        <Helmet>
+          <title>Confirm Secret | Dgram</title>
+        </Helmet>
+        <form onSubmit={onSubmit}>
+            <Input placeholder="Paste your secret" required { ...secret} />
             <Button text={"Confirm"} />
-            </form>
+        </form> 
+        </>
         )}
       </Form>
-      <StateChanger>
+      { action !== "confirm" && (
+          <StateChanger>
           {action === "logIn" ? (
               <>
               Don't have an account?{" "}
@@ -93,5 +111,6 @@ export default ({
               </>
           )}
       </StateChanger>
+      ) }
     </Wrapper>
 );
